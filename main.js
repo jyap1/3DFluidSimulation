@@ -7,7 +7,7 @@ var main = function() {
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	document.body.appendChild( renderer.domElement );
 
-	var fluid = new Fluid( .1, 2 );
+	var fluid = new Fluid( .05, 2 );
 
 	var sceneUtil = new SceneUtil();
 	sceneUtil.addFluid( scene, fluid );
