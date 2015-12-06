@@ -8,27 +8,27 @@ function Fluid ( grain, bulk ) {
 	this.bulk = bulk;
 
 	this.particles = [];
-	this.geometry = new THREE.SphereGeometry( grain, 12, 12 );
+	this.geometry = new THREE.CircleGeometry( grain, 8 );
 	this.material = new THREE.MeshNormalMaterial();
 
-	this._initializeFluid = function () {
+	this._createFluid = function () {
 		
 		this.bulk = this.bulk / 2;
 		for( var x = -this.bulk; x < this.bulk; x += grain  ) {
 			for( var y = -this.bulk; y < this.bulk; y += grain ) {
-				for( var z = -this.bulk; z < this.bulk; z += grain ) {
+				//for( var z = -this.bulk; z < this.bulk; z += grain ) {
 
-					var sphere = new THREE.Mesh( this.geometry, this.material );
+					var particle = new THREE.Mesh( this.geometry, this.material );
 
-					sphere.position.x = x;
-					sphere.position.y = y;
-					sphere.position.z = z;
+					particle.position.x = x;
+					particle.position.y = y;
+					//particle.position.z = z;
 
-					this.particles.push( sphere );
-				}
+					this.particles.push( particle );
+				//}
 			}
 		}
 	};
 
-	this._initializeFluid();
+	this._createFluid();
 };
