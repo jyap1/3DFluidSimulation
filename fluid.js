@@ -1,31 +1,27 @@
 function Fluid ( grain, bulk ) {
-	/*
-		grain: radius of each individual particle
-		bulk: cubic volume in which particles are created
-	*/
 
 	this.grain = grain;
 	this.bulk = bulk;
 
 	this.particles = [];
-	this.geometry = new THREE.CircleGeometry( grain, 8 );
-	this.material = new THREE.MeshNormalMaterial();
+	this.geometry = new THREE.SphereBufferGeometry( grain, 8, 8 );
+	this.material = new THREE.MeshDepthMaterial();
 
 	this._createFluid = function () {
 		
-		this.bulk = this.bulk / 2;
-		for( var x = -this.bulk; x < this.bulk; x += grain  ) {
-			for( var y = -this.bulk; y < this.bulk; y += grain ) {
-				//for( var z = -this.bulk; z < this.bulk; z += grain ) {
+		var particleTemplate = new THREE.Mesh( this.geometry, this.material );
+		for( var x = 0; x < this.bulk; x += 1.5 * grain ) {
+			for( var y = 0; y < 1.5 * this.bulk; y += 1.5 * grain ) {
+				for( var z = 0; z < this.bulk; z += 1.5 * grain ) {
 
-					var particle = new THREE.Mesh( this.geometry, this.material );
+					var particle = particleTemplate.clone();
 
 					particle.position.x = x;
 					particle.position.y = y;
-					//particle.position.z = z;
+					particle.position.z = z;
 
 					this.particles.push( particle );
-				//}
+				}
 			}
 		}
 	};

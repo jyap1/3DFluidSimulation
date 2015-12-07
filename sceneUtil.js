@@ -1,10 +1,17 @@
-function SceneUtil () {
+function SceneUtil ( scene ) {
 
-	this.addFluid = function ( scene, fluid ) {
+	this.scene = scene;
+
+	this.addFluid = function ( fluid ) {
 
 		for ( var i = 0; i < fluid.particles.length; i++ ) {
 
-			scene.add( fluid.particles[ i ] );
+			this.scene.add( fluid.particles[ i ] );
 		}
+	};
+
+	this.addBoundary = function ( boundary ) {
+
+		this.scene.add( boundary.mesh );
 	};
 };
